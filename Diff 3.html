@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Diff Program</title>
+    
+    <style>
+        .added { color: green; }
+        .removed { color: red; text-decoration: line-through; }
+        "background-image: url('https://th.bing.com/th/id/OIP.uHrDUCEbFVxRTdSSRjC5_gHaCu?w=349&h=128&c=7&r=0&o=5&pid=1.7');"
+    </style>
+</head>
+<body>
+    <h1>This cat is Diff</h1>
+    <textarea id="text1" rows="4" cols="50"></textarea>
+    <textarea id="text2" rows="4" cols="50"></textarea>
+    <button onclick="performDiff()">Diff</button>
+    <div id="diffOutput"></div>
+<!-- <iframe src="https://th.bing.com/th/id/R.9dabc7592d9553eb621acf80662ce680?rik=ka5mgqnJGnBK2Q&riu=http%3a%2f%2fwww.photosdaily.com%2fwp-content%2fuploads%2f2012%2f12%2fHappy-Cat.jpg&ehk=bT%2bgcbGMsLBaJUz9E5TJv5b2qMZKgJ3h1BLrGtSjkx8%3d&risl=&pid=ImgRaw&r=0" width="2000" height="1000"></iframe> -->
+
+    <script>
+        function performDiff() {
+            var text1 = document.getElementById('text1').value;
+            var text2 = document.getElementById('text2').value;
+
+            // Simple diff algorithm (placeholder for actual diff logic)
+            var diff = '';
+            if (text1 !== text2) {
+                var maxLength = Math.max(text1.length, text2.length);
+                for (var i = 0; i < maxLength; i++) {
+                    if (text1[i] !== text2[i]) {
+                        if (text1[i] && !text2.includes(text1[i])) {
+                            diff += '<span class="removed">' + text1[i] + '</span>';
+                        }
+                        if (text2[i] && !text1.includes(text2[i])) {
+                            diff += '<span class="added">' + text2[i] + '</span>';
+                        }
+                    } else {
+                        diff += text1[i] || text2[i] || '';
+                    }
+                }
+            } else {
+                diff = 'No differences found.';
+            }
+
+            document.getElementById('diffOutput').innerHTML = diff;
+        }
+    </script>
+</body>
+</html>
